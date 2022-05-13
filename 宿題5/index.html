@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+</head>
+<body>
+
+<button onclick="test()">test</button>
+<button onclick="clear()">clear</button>
+
+<pre id="position_view"></pre>
+
+<script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AufYPyRjqeY2pLqCOBX5W5oc282m4h4h_qE57zLuX-4Q5fX0YFXadQCoNfbVF8fl' async defer></script>
+
+<script>
+    var num = 0;
+    var watch_id;
+    
+    function test() {
+        watch_id = navigator.geolocation.watchPosition(test2,
+         function(e) { alert(e.message); },
+          {"enableHighAccuracy": 
+          true, 
+          "timeout": 20000, 
+          "maximumAge": 2000});
+    }
+    
+    function clear() {
+        navigator.geolocation.clearWatch(watch_id);
+    }
+    
+    function test2(position) {
+    
+        var geo_text = "緯度:" + position.coords.latitude + "\n";
+        geo_text += "経度:" + position.coords.longitude + "\n";
+        document.getElementById('position_view').innerHTML = geo_text;
+        document.innerHTML = geo_text + geo_text;
+    }
+    
+    </script>
+
+</body>
+</html>
